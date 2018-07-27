@@ -16,7 +16,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/h2san/allproxy"
+	"github.com/hillguo/allproxy"
 )
 
 func main() {
@@ -112,14 +112,14 @@ func handleConn(conn net.Conn, cipher *allproxy.Cipher) {
 		var httpRequestLine = make([]byte, 1024)
 		copy(httpRequestLine[:2], buf[:2])
 
-		//log.Println(string(httpRequestLine[:2]))
+		log.Println(string(httpRequestLine[:2]))
 		var hasreadn = 2
 		for {
 			n, err := conn.Read(httpRequestLine[hasreadn:])
 			if err != nil {
 				return
 			}
-			//log.Println(string(httpRequestLine[:n+hasreadn]))
+			log.Println(string(httpRequestLine[:n+hasreadn]))
 			i := bytes.IndexByte(httpRequestLine[:hasreadn+n], '\n')
 			hasreadn += n
 			if i != -1 {
@@ -149,7 +149,7 @@ func handleConn(conn net.Conn, cipher *allproxy.Cipher) {
 						address = hostPortUrl.Host
 					}
 				}
-				//log.Println(address)
+				log.Println(address)
 
 				scocks5, err := allproxy.ShadowSocks5Dial(cipher, proxyNet, proxyAddr, nil, allproxy.Direct)
 				perHost := allproxy.NewPerHost(scocks5, scocks5)
@@ -173,7 +173,7 @@ func handleConn(conn net.Conn, cipher *allproxy.Cipher) {
 					}
 					//remote.Write(httpRequestLine[:hasreadn])
 				} else {
-					//log.Println(string(httpRequestLine[:hasreadn]))
+					log.Println(string(httpRequestLine[:hasreadn]))
 					remote.Write(httpRequestLine[:hasreadn])
 				}
 				var wg sync.WaitGroup

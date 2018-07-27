@@ -5,12 +5,13 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net"
 	"os"
 	"strconv"
 	"sync"
 
-	"github.com/h2san/allproxy"
+	"github.com/hillguo/allproxy"
 )
 
 func main() {
@@ -19,6 +20,15 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
+	}
+	_, err = net.Dial("tcp", "baidu.com:80")
+	log.Println("dial ", "14.215.177.39:80")
+	if err != nil {
+		fmt.Println(err)
+		return
+	} else {
+		fmt.Println("ok")
+		return
 	}
 	for {
 		conn, err := ln.Accept()
@@ -46,6 +56,7 @@ func handleConnection(c net.Conn, cipher *allproxy.Cipher) {
 	}
 
 	remote, err := net.Dial("tcp", host)
+	log.Println("dial ", host)
 	if err != nil {
 		fmt.Println(err)
 		return

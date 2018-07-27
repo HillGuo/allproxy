@@ -1,9 +1,9 @@
 {
     "server":"127.0.0.1",
-    "server_port":443,
+    "server_port":8002,
     "local_address":"127.0.0.1",
-    "local_port":1081,
-    "password":"test",
+    "local_port":8001,
+    "password":"h2san",
     "timeout":300,
     "method":"aes-256-cfb",
     "noproxy":["127.0.0.1","localhost"]   
