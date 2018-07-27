@@ -21,15 +21,6 @@ func main() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	_, err = net.Dial("tcp", "baidu.com:80")
-	log.Println("dial ", "14.215.177.39:80")
-	if err != nil {
-		fmt.Println(err)
-		return
-	} else {
-		fmt.Println("ok")
-		return
-	}
 	for {
 		conn, err := ln.Accept()
 
